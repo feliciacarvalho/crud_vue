@@ -1,60 +1,65 @@
 <template>
-  <v-card>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant.sync="mini"
-      permanent
-    >
-      <v-list-item class="px-2">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-        </v-list-item-avatar>
+<div>
+  <v-navigation-drawer v-model="drawer" app>
+    <v-list-item>
+      <v-avatar size="40" color="indigo">
+        <v-icon dark> mdi-account-circle </v-icon>
+      </v-avatar>
+      <v-list-item-content>
+        <v-list-item-title class="text-h6"> Pessoa </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
 
-        <v-list-item-title>John Leider</v-list-item-title>
+    <v-divider></v-divider>
 
-        <v-btn
-          icon
-          @click.stop="mini = !mini"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
+    <v-list dense nav>
+      <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
       </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 
-      <v-divider></v-divider>
+  <v-app-bar app>
+    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-toolbar-title></v-toolbar-title>
 
-      <v-list dense>
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+  </v-app-bar>
+  </div>
 </template>
 
-
-
 <script>
-  export default {
-    data () {
-      return {
-        drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
-        mini: true,
-      }
-    },
-  }
+export default {
+  data: () => ({
+    drawer: true,
+    items: [
+      { title: "Início", icon: "mdi-view-dashboard", to: "/" },
+      //{ title: 'Photos', icon: 'mdi-image' },
+      {
+        title: "Tarefa",
+        icon: "mdi-account-search",
+        to: "/tarefa",
+      },
+      {
+        title: "Consulta Gestor",
+        icon: "mdi-account-edit",
+        to: "/consultagestor",
+      },
+    //   { title: "Nova Tomada ", icon: "", to: "/novatomada" },
+      {
+        title: "Envio de Processo",
+        icon: "mdi-cloud-upload",
+        to: "/envioprocesso",
+      },
+      { title: "Sair", icon: "mdi-logout" },
+    ],
+    
+  }),
+};
 </script>
